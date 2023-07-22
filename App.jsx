@@ -1,28 +1,48 @@
-import {View, Text, StyleSheet, Pressable, Modal} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Modal, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import Form from './components/Form';
-
+import Item from './components/Item';
 export default function App() {
   const [visible, setVisible] = useState(false);
+  const [pacientes, setpacientes] = useState([]);
+  
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
       <Text style={styles.sub}>Veterinaria</Text>
       <Pressable style={styles.btn} onPress={()=> setVisible(!visible)}>
-        <Text style={styles.text}>Nueva Cita</Text>
+        <Text style={styles.textb}>Nueva Cita</Text>
       </Pressable>
-      <Form visible={visible} setVisible={setVisible}/>
+      <Form visible={visible} setVisible={setVisible} setpacientes={setpacientes} pacientes={pacientes}/>
+      {pacientes.length === 0 ? 
+      <Text style={styles.textr}>No hay citas</Text> :
+ <FlatList
+ data={pacientes}
+ keyExtractor={(item)=> item.id}
+ renderItem={(item) => {
+return (
+<Item
+ item={item}
+/>
+)
+
+ }}
+ />  
+    }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  textv: {textAlign: 'center' , color: 'green', fontSize: 20, fontWeight: 'bold', marginTop: 40},
+  textr: {textAlign: 'center' , color: 'red', fontSize: 20, fontWeight: 'bold'},
+  textb: {textAlign: 'center' , color: 'white', fontSize: 20, fontWeight: 'bold'},
   container: {
     flex: 1,
     backgroundColor: '#f3f4f6',
   },
-  text: {textAlign: 'center' , color: 'white', fontSize: 20, fontWeight: 'bold'},
+  text: {textAlign: 'center' , color: 'black', fontSize: 20, fontWeight: 'bold'},
   titulo: {
     textAlign: 'center',
     color: 'black',

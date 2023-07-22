@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable, Modal, SafeAreaView, Button, TextInput, ScrollView, Alert } from 'react-native';
 import DatePicker from 'react-native-date-picker'
 
-const Form = ({visible, setVisible})=> {
+const Form = ({visible, setVisible, setpacientes, pacientes})=> {
   const [date, setDate] = useState(new Date())
 const [nombremascota, setNombremascota] = useState('');
 const [nombreDueno, setNombreDueno] = useState('');
@@ -16,8 +16,17 @@ const handlecita = () => {
  Alert.alert('Error', 'Todos los campos son obligatorios', )
   return;
   }
-  const nuevoPaciente = {nombremascota, nombreDueno, email, telefono, sintomas, date}
-  console.log(nuevoPaciente);
+  const nuevoPaciente = { 
+    id: Date.now(),
+    nombremascota, nombreDueno, email, telefono, sintomas, date}
+      setpacientes([...pacientes, nuevoPaciente]);
+  setVisible(!visible);
+  setNombremascota('');
+  setNombreDueno('');
+  setEmail('');
+  setTelefono('');
+  setSintomas('');
+  setDate(new Date());
 }
 
 //  funcion para crear cita
