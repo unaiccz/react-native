@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, Pressable, Modal, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import Form from './components/Form';
-import Item from './components/Item';
+import Paciente from './components/Paciente';
 export default function App() {
   const [visible, setVisible] = useState(false);
   const [pacientes, setpacientes] = useState([]);
@@ -22,8 +22,8 @@ export default function App() {
  keyExtractor={(item)=> item.id}
  renderItem={(item) => {
 return (
-<Item
- item={item}
+<Paciente
+item={item}
 />
 )
 
@@ -35,6 +35,7 @@ return (
 }
 
 const styles = StyleSheet.create({
+
   textv: {textAlign: 'center' , color: 'green', fontSize: 20, fontWeight: 'bold', marginTop: 40},
   textr: {textAlign: 'center' , color: 'red', fontSize: 20, fontWeight: 'bold'},
   textb: {textAlign: 'center' , color: 'white', fontSize: 20, fontWeight: 'bold'},
